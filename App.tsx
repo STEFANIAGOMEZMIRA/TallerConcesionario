@@ -7,6 +7,7 @@ import CatalogScreen from './src/component/Catalogo';
 import TestDriveScreen from './src/component/Pruebamanejo';
 import ContactScreen from './src/component/Contact';
 import SearchScreen from './src/component/SearchScreen';
+import RequestaQuote from './src/component/RequestaQuote';
 
 const Stack = createStackNavigator();
 
@@ -19,6 +20,7 @@ const App = () => {
         <Stack.Screen name="TestDrive" component={TestDriveScreen} />
         <Stack.Screen name="Contact" component={ContactScreen} />
         <Stack.Screen name="Search" component={SearchScreen} />
+        <Stack.Screen name="RequestaQuote" component={RequestaQuote} />
       </Stack.Navigator>
     </NavigationContainer>
   );

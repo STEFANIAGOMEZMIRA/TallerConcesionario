@@ -13,19 +13,27 @@ const Menu = ({ navigation }) => {
       >
         <Text style={styles.optionText}>Catalogo de Vehículos</Text>
       </TouchableOpacity>
-      
+
       <TouchableOpacity
         style={styles.option}
         onPress={() => navigation.navigate('Search')}
       >
         <Text style={styles.optionText}>Buscar Vehículos</Text>
       </TouchableOpacity>
-     
+
       <TouchableOpacity
         style={styles.option}
         onPress={() => navigation.navigate('TestDrive')}
+
       >
-        <Text style={styles.optionText}>Agendar Prueba de Manejo</Text>
+
+        <Text style={styles.optionText}>Solicitud de prueba de manejo</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.option}
+        onPress={() => navigation.navigate('RequestaQuote')}
+      >
+        <Text style={styles.optionText}>Solicitar cotización</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.option}
