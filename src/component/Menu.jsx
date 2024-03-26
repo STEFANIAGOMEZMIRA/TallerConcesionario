@@ -9,10 +9,18 @@ const Menu = ({ navigation }) => {
       <Text style={styles.subtitle}>Selecciona una opción:</Text>
       <TouchableOpacity
         style={styles.option}
+        onPress={() => navigation.navigate('Catalog')}
+      >
+        <Text style={styles.optionText}>Catalogo de Vehículos</Text>
+      </TouchableOpacity>
+      
+      <TouchableOpacity
+        style={styles.option}
         onPress={() => navigation.navigate('Search')}
       >
         <Text style={styles.optionText}>Buscar Vehículos</Text>
       </TouchableOpacity>
+     
       <TouchableOpacity
         style={styles.option}
         onPress={() => navigation.navigate('TestDrive')}
