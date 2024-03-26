@@ -1,7 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import Menu from './src/component/Menu'; 
-import Contact from './src/component/Contact';
+import Menu from './SABADO23/src/component/Menu'; 
 
 const App = () => {
   return (
