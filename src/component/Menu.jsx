@@ -1,22 +1,29 @@
+// Menu.js
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const Menu = () => {
+const Menu = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome to the Vehicle Dealership!</Text>
-      <Text style={styles.subtitle}>Select an option:</Text>
-      <TouchableOpacity style={styles.option}>
-        <Text style={styles.optionText}>View Vehicle Catalog</Text>
+      <Text style={styles.title}>¡Bienvenido a la Concesionaria de Vehículos!</Text>
+      <Text style={styles.subtitle}>Selecciona una opción:</Text>
+      <TouchableOpacity
+        style={styles.option}
+        onPress={() => navigation.navigate('Search')}
+      >
+        <Text style={styles.optionText}>Buscar Vehículos</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.option}>
-        <Text style={styles.optionText}>Search Vehicles</Text>
+      <TouchableOpacity
+        style={styles.option}
+        onPress={() => navigation.navigate('TestDrive')}
+      >
+        <Text style={styles.optionText}>Agendar Prueba de Manejo</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.option}>
-        <Text style={styles.optionText}>Schedule Test Drive</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.option}>
-        <Text style={styles.optionText}>Contact</Text>
+      <TouchableOpacity
+        style={styles.option}
+        onPress={() => navigation.navigate('Contact')}
+      >
+        <Text style={styles.optionText}>Contacto</Text>
       </TouchableOpacity>
     </View>
   );
@@ -24,11 +31,11 @@ const Menu = () => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
     backgroundColor: '#e76aa9',
-    height: Dimensions.get('window').height, 
   },
   title: {
     fontSize: 24,
@@ -50,14 +57,6 @@ const styles = StyleSheet.create({
     width: '80%',
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
   },
   optionText: {
     fontSize: 16,

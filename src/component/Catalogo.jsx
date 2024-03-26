@@ -29,3 +29,5 @@ const Catalog = () => {
 return <VehicleList Vehicle={Vehicle}/>;
          
 };
+
+export default Catalog
