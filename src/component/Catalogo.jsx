@@ -2,17 +2,17 @@ import React from "react";
 import VehicleList from "./VehiculoList";
 
 const Catalog = () => {
-    const Vehicle = [
+    const vehicles = [
         {
             id: 1,
-            imageUrl:'',
+            imageUrl:'https://www.autosrodando.com/wp-content/uploads/2023/10/honda-civic-hibrido-2024-02-1280x720.jpg',
             description: 'Honda civic, 2024',
             price: 250000
         },
 
         {
             id: 2,
-            imageUrl:'',
+            imageUrl:'https://www.autosrodando.com/wp-content/uploads/2023/10/honda-civic-hibrido-2024-02-1280x720.jpg',
             description: 'Honda civic, 2024',
             price: 250000
 
@@ -20,13 +20,13 @@ const Catalog = () => {
 
         { 
             id: 3,
-            imageUrl:'',
+            imageUrl:'https://www.autosrodando.com/wp-content/uploads/2023/10/honda-civic-hibrido-2024-02-1280x720.jpg',
             description: 'Honda civic, 2024',
             price: 250000
         },
     ];
 
-return <VehicleList Vehicle={Vehicle}/>;
+return <VehicleList vehicles={vehicles}/>;
          
 };
 

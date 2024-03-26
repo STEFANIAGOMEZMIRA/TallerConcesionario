@@ -1,21 +1,20 @@
-import React from "react";
-import { ScrollView } from "react-native";
-import Vehicle from "./Vehiculo";
+import React from 'react';
+import { ScrollView } from 'react-native';
+import Vehicle from './Vehiculo';
 
-
-const VehicleList = ({Vehicle}) =>{
+const VehicleList = ({ vehicles }) => {
     return (
         <ScrollView>
-            {Vehicle.map((Vehicle) => (
+            {vehicles.map((vehicle) => (
                 <Vehicle
-                key={Vehicle.imageUrl}
-                imageUrl={Vehicle.imageUrl}
-                description={Vehicle.description}
-                price={Vehicle.price}
+                    key={vehicle.id}
+                    imageUrl={vehicle.imageUrl}
+                    description={vehicle.description}
+                    price={vehicle.price}
                 />
-
             ))}
         </ScrollView>
-    );
-};
-export default VehicleList;
+    )
+}
+
+export default VehicleList
