@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
-import Vehicle from './Vehiculo';
+import Vehicle from './Vehicle';
 
 const VehicleList = ({ vehicles }) => {
     return (
