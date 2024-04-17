@@ -35,6 +35,23 @@ const Menu = ({ navigation }) => {
       >
         <Text style={styles.optionText}>Solicitar cotización</Text>
       </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.option}
+        onPress={() => navigation.navigate('WorkshopServic')}
+      >
+        <Text style={styles.optionText}>Servicio de taller</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.option}
+        onPress={() => navigation.navigate('ServiceHistory')}
+      >
+        <Text style={styles.optionText}>Historial de servicio</Text>
+      </TouchableOpacity>
+
+
+
       <TouchableOpacity
         style={styles.option}
         onPress={() => navigation.navigate('Contact')}

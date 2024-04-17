@@ -8,6 +8,9 @@ import TestDriveScreen from './src/component/DrivingTest';
 import ContactScreen from './src/component/Contact';
 import SearchScreen from './src/component/SearchScreen';
 import RequestaQuote from './src/component/RequestaQuote';
+import WorkshopServic from './src/component/WorkshopServic';
+import ServiceHistory from './src/component/ServiceHistory';
+
 
 const Stack = createStackNavigator();
 
@@ -21,6 +24,10 @@ const App = () => {
         <Stack.Screen name="Contact" component={ContactScreen} />
         <Stack.Screen name="Search" component={SearchScreen} />
         <Stack.Screen name="RequestaQuote" component={RequestaQuote} />
+        <Stack.Screen name="WorkshopServic" component={WorkshopServic} />
+        <Stack.Screen name="ServiceHistory" component={ServiceHistory} />
+        
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

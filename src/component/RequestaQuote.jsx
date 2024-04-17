@@ -11,14 +11,19 @@ const RequestaQuote = () => {
 
     const handleSend = () => {
         if (fullname && contactNumber && message) {
-          Alert.alert('Mensaje enviado', 'Tu mensaje ha sido enviado correctamente');
-          setFullname('');
-          setContactNumber('');
-          setMessage('');
+            if (contactNumber.length !== 10) {
+                Alert.alert('Error', 'Por favor ingresa un número de contacto válido');
+                return;
+            }
+            Alert.alert('Mensaje enviado', 'Tu mensaje ha sido enviado correctamente');
+            setFullname('');
+            setContactNumber('');
+            setMessage('');
         } else {
-          Alert.alert('Error', 'Por favor completa todos los campos');
+            Alert.alert('Error', 'Por favor completa todos los campos');
         }
-      };
+    };
+
 
 
 
@@ -38,8 +43,13 @@ const RequestaQuote = () => {
                 placeholder='Campo obligatorio'
                 value={contactNumber}
                 keyboardType='numeric'
-                onChangeText={contactNumber => setContactNumber(contactNumber)}
+                onChangeText={(text) => {
+                    if (text.length <= 10) {
+                        setContactNumber(text);
+                    }
+                }}
             />
+
             <Divider />
             <TextInput
                 label="Deja aquí tu mensaje"
@@ -51,7 +61,7 @@ const RequestaQuote = () => {
 
             <Divider />
 
-            <Button icon="camera" mode="contained" onPress= {handleSend}>
+            <Button icon="camera" mode="contained" onPress={handleSend}>
                 Enviar información
             </Button>
 

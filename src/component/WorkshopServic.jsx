@@ -4,10 +4,9 @@ import { Button, TextInput } from 'react-native-paper';
 import { DatePickerInput, registerTranslation, es, TimePickerModal } from 'react-native-paper-dates';
 registerTranslation('es', es);
 
-const DrivingTest = () => {
+const WorkshopService = () => {
   const [date, setDate] = useState('');
   const [fullName, setFullName] = useState('');
-  const [identificationNumber, setIdentificationNumber] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
   const [dateTime, setDateTime] = useState('Click en el icono...');
@@ -28,16 +27,15 @@ const DrivingTest = () => {
   );
 
   const enviarSolicitud = () => {
-    if (!date || !fullName || !identificationNumber || !phoneNumber) {
+    if (!date || !fullName || !phoneNumber) {
       Alert.alert('Campos obligatorios', 'Por favor completa todos los campos.');
       return;
     }
 
-    Alert.alert('Solicitud enviada', 'Tu solicitud de prueba de manejo ha sido enviada correctamente.');
+    Alert.alert('Solicitud enviada', 'Tu solicitud de cita ha sido enviada correctamente.');
    
     setDate('');
     setFullName('');
-    setIdentificationNumber('');
     setPhoneNumber('');
     setEmail('');
     setDateTime('Click en el icono...');
@@ -83,15 +81,6 @@ const DrivingTest = () => {
 
         <TextInput
           style={styles.input}
-          value={identificationNumber}
-          onChangeText={setIdentificationNumber}
-          label="Número de Identificación"
-          keyboardType="numeric"
-          right={<TextInput.Icon icon="identifier" />}
-        />
-
-        <TextInput
-          style={styles.input}
           value={phoneNumber}
           onChangeText={setPhoneNumber}
           label="Número de celular"
@@ -107,7 +96,7 @@ const DrivingTest = () => {
           right={<TextInput.Icon icon="email" />}
         />
 
-        <Button icon="send" mode="contained" onPress={enviarSolicitud}>Enviar solicitud</Button>
+        <Button icon="send" mode="contained" onPress={enviarSolicitud}>Agendar cita</Button>
       </View>
     </ScrollView>
   );
@@ -125,4 +114,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DrivingTest;
+export default WorkshopService;

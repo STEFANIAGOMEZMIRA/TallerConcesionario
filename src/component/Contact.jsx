@@ -1,37 +1,66 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert } from 'react-native';
-
+import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
 
 const Contact = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
 
   const handleSend = () => {
-    if (name && email && message) {
+    if (name && email && phone && message) {
+      if (!validateEmail(email)) {
+        Alert.alert('Error', 'Por favor ingresa un correo electrónico válido');
+        return;
+      }
+      if (!validatePhone(phone)) {
+        Alert.alert('Error', 'Por favor ingresa un número de teléfono válido');
+        return;
+      }
       Alert.alert('Mensaje enviado', 'Tu mensaje ha sido enviado correctamente');
       setName('');
       setEmail('');
+      setPhone('');
       setMessage('');
     } else {
       Alert.alert('Error', 'Por favor completa todos los campos');
     }
   };
 
+  const validateEmail = (email) => {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
+
+  const validatePhone = (phone) => {
+    const re = /^\d+$/;
+    return re.test(phone);
+  };
+
   return (
-    <View>
-      <Text>Contacto</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Contacto</Text>
       <TextInput
+        style={styles.input}
         placeholder="Nombre"
         value={name}
         onChangeText={setName}
       />
       <TextInput
+        style={styles.input}
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
       />
       <TextInput
+        style={styles.input}
+        placeholder="Teléfono"
+        value={phone}
+        onChangeText={setPhone}
+        keyboardType="numeric"
+      />
+      <TextInput
+        style={[styles.input, styles.messageInput]}
         placeholder="Mensaje"
         value={message}
         onChangeText={setMessage}
@@ -42,5 +71,26 @@ const Contact = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+  },
+  messageInput: {
+    height: 100,
+  },
+});
 
 export default Contact;
