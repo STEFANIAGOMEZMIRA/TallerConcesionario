@@ -1,4 +1,3 @@
-// NotificationSettings.js
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Checkbox, Button } from 'react-native-paper';
