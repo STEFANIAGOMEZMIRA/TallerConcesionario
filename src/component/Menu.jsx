@@ -50,6 +50,12 @@ const Menu = ({ navigation }) => {
         <Text style={styles.optionText}>Historial de servicio</Text>
       </TouchableOpacity>
 
+      <TouchableOpacity
+        style={styles.option}
+        onPress={() => navigation.navigate('NotificationSettings')}
+      >
+        <Text style={styles.optionText}>Ofertas y promociones</Text>
+      </TouchableOpacity>
 
 
       <TouchableOpacity

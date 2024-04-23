@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, Alert } from 'react-native';
-import { Button, TextInput, DataTable } from 'react-native-paper';
+import { Button, TextInput, DataTable, Title } from 'react-native-paper';
 
 const ServiceHistory = () => {
   const [customerId, setCustomerId] = useState('');
@@ -17,7 +17,6 @@ const ServiceHistory = () => {
       return;
     }
 
-    
     const dummyServiceHistory = [
       { id: 1, date: '2024-04-01', description: 'Cambio de aceite' },
       { id: 2, date: '2024-03-15', description: 'Reparación de frenos' },
@@ -30,13 +29,14 @@ const ServiceHistory = () => {
   return (
     <ScrollView>
       <View style={styles.container}>
+        <Title style={styles.title}>Historial de Servicios</Title>
         <TextInput
           style={styles.input}
           value={customerId}
           onChangeText={setCustomerId}
           label="ID del cliente"
           keyboardType="numeric"
-          right={<TextInput.Icon icon="account" />}
+          right={<TextInput.Icon name="account" />}
         />
 
         <Button icon="search-web" mode="contained" onPress={buscarHistorial}>Buscar historial</Button>
@@ -67,7 +67,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 25,
-    backgroundColor: '#EEEEEE',
+    backgroundColor: '#FFFFFF',
+  },
+  title: {
+    marginBottom: 20,
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   input: {
     marginBottom: 23,

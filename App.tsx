@@ -10,6 +10,7 @@ import SearchScreen from './src/component/SearchScreen';
 import RequestaQuote from './src/component/RequestaQuote';
 import WorkshopServic from './src/component/WorkshopServic';
 import ServiceHistory from './src/component/ServiceHistory';
+import NotificationSettings  from './src/component/NotificationSettings';
 
 
 const Stack = createStackNavigator();
@@ -26,7 +27,7 @@ const App = () => {
         <Stack.Screen name="RequestaQuote" component={RequestaQuote} />
         <Stack.Screen name="WorkshopServic" component={WorkshopServic} />
         <Stack.Screen name="ServiceHistory" component={ServiceHistory} />
-        
+        <Stack.Screen name="NotificationSettings" component={NotificationSettings} options={{ title: 'Configuración de Notificaciones' }} />
         
       </Stack.Navigator>
     </NavigationContainer>
