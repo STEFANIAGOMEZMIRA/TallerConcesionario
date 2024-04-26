@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "733372372409",
+    "project_id": "concesionario-865d2",
+    "storage_bucket": "concesionario-865d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:733372372409:android:da5401f0dbcca3abd61268",
+        "android_client_info": {
+          "package_name": "com.sabado23"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyjodDoz3TbHgrq1vuSeEcajxrUuLndKM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

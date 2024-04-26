@@ -3,6 +3,13 @@ import { ScrollView } from 'react-native';
 import Vehicle from './Vehicle';
 
 const VehicleList = ({ vehicles }) => {
+
+
+
+
+
+
+    
     return (
         <ScrollView>
             {vehicles.map((vehicle) => (
