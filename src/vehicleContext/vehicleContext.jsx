@@ -36,11 +36,9 @@ const VehicleContextProvider = (props) => {
             } else {
                 let isPartialMatch = false;
                 for (let i = 0; i < keywordArray.length; i++) {
-                    if (vehicle.brand && vehicle.brand.toLowerCase().includes(keywordArray[i].toLowerCase()) ||
-
-                    (vehicle.model && vehicle.model.toLowerCase().includes(keywordArray[i].toLowerCase())) ||
-                        vehicle.year.toLowerCase().includes(keywordArray[i].toLowerCase()) ||
-                        vehicle.price.toLowerCase().includes(keywordArray[i].toLowerCase())) {
+                    if ((vehicle.model && vehicle.model.toLowerCase().includes(keywordArray[i].toLowerCase())) ||
+                        (vehicle.year && vehicle.year.toLowerCase().includes(keywordArray[i].toLowerCase())) ||
+                        (vehicle.price && typeof vehicle.price === 'string' && vehicle.price.toLowerCase().includes(keywordArray[i].toLowerCase()))) {
                         isPartialMatch = true;
                         break; // Detiene la búsqueda si encuentra una coincidencia parcial
                     }
