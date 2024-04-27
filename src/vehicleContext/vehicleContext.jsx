@@ -20,38 +20,29 @@ export function useSearchVehicle() {
 const VehicleContextProvider = (props) => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
-
     async function searchVehicleFunction(keyword, setVehicles, showActivity) {
         showActivity(true);
-        const keywordArray = keyword.split(" ");
-        let exactMatches = [];
-        let partialMatches = [];
-        let isExactMatchFound = false;
+        const keywordArray = keyword.toLowerCase().split(" ");
+        let filteredVehicles = [];
     
         for (const vehicle of data) {
-            if (vehicle.name && keyword && vehicle.name.toLowerCase() === keyword.toLowerCase()) {
-                exactMatches.push(vehicle);
-                isExactMatchFound = true;
-                break; // Detiene la búsqueda si se encuentra una coincidencia exacta
-            } else {
-                let isPartialMatch = false;
-                for (let i = 0; i < keywordArray.length; i++) {
-                    if ((vehicle.model && vehicle.model.toLowerCase().includes(keywordArray[i].toLowerCase())) ||
-                        (vehicle.year && vehicle.year.toLowerCase().includes(keywordArray[i].toLowerCase())) ||
-                        (vehicle.price && typeof vehicle.price === 'string' && vehicle.price.toLowerCase().includes(keywordArray[i].toLowerCase()))) {
-                        isPartialMatch = true;
-                        break; // Detiene la búsqueda si encuentra una coincidencia parcial
-                    }
+            let isMatch = false;
+            for (let i = 0; i < keywordArray.length; i++) {
+                if ((vehicle.description && vehicle.description.toLowerCase().includes(keywordArray[i])) ||
+                    (vehicle.price && typeof vehicle.price === 'string' && vehicle.price.toLowerCase().includes(keywordArray[i]))) {
+                    isMatch = true;
+                    break; // Detiene la búsqueda si encuentra una coincidencia
                 }
-                if (isPartialMatch) {
-                    partialMatches.push(vehicle);
-                }
+            }
+            if (isMatch) {
+                filteredVehicles.push(vehicle);
             }
         }
     
-        setVehicles(isExactMatchFound ? exactMatches : partialMatches);
+        setVehicles(filteredVehicles);
         showActivity(false);
     }
+    
     
 
     async function loadData() {
