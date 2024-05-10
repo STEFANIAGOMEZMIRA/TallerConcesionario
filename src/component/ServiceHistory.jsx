@@ -1,29 +1,24 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, Alert } from 'react-native';
 import { Button, TextInput, DataTable, Title } from 'react-native-paper';
+import firestore from '@react-native-firebase/firestore';
 
 const ServiceHistory = () => {
   const [customerId, setCustomerId] = useState('');
   const [serviceHistory, setServiceHistory] = useState([]);
 
-  const buscarHistorial = () => {
-    // Aquí iría la lógica para buscar el historial de servicios por cliente
-    // Por ejemplo, podrías hacer una petición a una API
-    // y luego actualizar el estado `serviceHistory` con los datos obtenidos
-    // Este es solo un ejemplo simplificado
-
+  const buscarHistorial = async () => {
     if (!customerId) {
       Alert.alert('Campo obligatorio', 'Por favor ingresa el ID del cliente.');
       return;
     }
 
-    const dummyServiceHistory = [
-      { id: 1, date: '2024-04-01', description: 'Cambio de aceite' },
-      { id: 2, date: '2024-03-15', description: 'Reparación de frenos' },
-      { id: 3, date: '2024-02-10', description: 'Mantenimiento preventivo' },
-    ];
-
-    setServiceHistory(dummyServiceHistory);
+    try {
+      const data = await firestore().collection('ServiceHistory').get();
+      setServiceHistory(data.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+    } catch (error) {
+      console.error('Error al buscar historial:', error);
+    }
   };
 
   return (
@@ -44,16 +39,16 @@ const ServiceHistory = () => {
         {serviceHistory.length > 0 && (
           <DataTable>
             <DataTable.Header>
-              <DataTable.Title>ID</DataTable.Title>
-              <DataTable.Title>Fecha</DataTable.Title>
+              <DataTable.Title>id</DataTable.Title>
+              <DataTable.Title>date</DataTable.Title>
               <DataTable.Title>Descripción</DataTable.Title>
             </DataTable.Header>
 
-            {serviceHistory.map((item) => (
-              <DataTable.Row key={item.id}>
+            {serviceHistory.map((item, index) => (
+              <DataTable.Row key={index}>
                 <DataTable.Cell>{item.id}</DataTable.Cell>
                 <DataTable.Cell>{item.date}</DataTable.Cell>
-                <DataTable.Cell>{item.description}</DataTable.Cell>
+                <DataTable.Cell>{item.Descripción}</DataTable.Cell>
               </DataTable.Row>
             ))}
           </DataTable>
