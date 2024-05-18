@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, Alert } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import { DatePickerInput, registerTranslation, es, TimePickerModal } from 'react-native-paper-dates';
+import firestore from '@react-native-firebase/firestore';
 registerTranslation('es', es);
 
 const DrivingTest = () => {
@@ -11,7 +12,7 @@ const DrivingTest = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
   const [dateTime, setDateTime] = useState('Click en el icono...');
-  const [visible, setVisible] = React.useState(false)
+  const [visible, setVisible] = useState(false)
 
   const onDismiss = React.useCallback(() => {
     setVisible(false)
@@ -33,16 +34,28 @@ const DrivingTest = () => {
       return;
     }
 
-    Alert.alert('Solicitud enviada', 'Tu solicitud de prueba de manejo ha sido enviada correctamente.');
-   
-    setDate('');
-    setFullName('');
-    setIdentificationNumber('');
-    setPhoneNumber('');
-    setEmail('');
-    setDateTime('Click en el icono...');
+    firestore().collection('Solicitud de prueba de manejo').add({
+        date: date.toISOString(),
+        fullName: fullName,
+        identificationNumber: identificationNumber,
+        phoneNumber: phoneNumber,
+        email: email,
+        dateTime: dateTime,
+      })
+      .then(() => {
+        Alert.alert('Solicitud enviada', 'Tu solicitud de prueba de manejo ha sido enviada correctamente.');
+        setDate('');
+        setFullName('');
+        setIdentificationNumber('');
+        setPhoneNumber('');
+        setEmail('');
+        setDateTime('Click en el icono...');
+      })
+      .catch((error) => {
+        console.error('Error al enviar la solicitud:', error);
+        Alert.alert('Error', 'Ocurrió un error al enviar la solicitud. Por favor, intenta nuevamente.');
+      });
   };
-  
 
   return (
     <ScrollView>
