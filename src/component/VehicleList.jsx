@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, FlatList, Button, Image, StyleSheet } from 'react-native';
 import { useCatalogData, useIsLoading, useSearchVehicle } from '../vehicleContext/vehicleContext';
 import { ActivityIndicator, MD2Colors } from 'react-native-paper';
+import TopBar from './TopBar';
 
 const VehicleList = () => {
     const data = useCatalogData();
@@ -52,6 +53,7 @@ const VehicleList = () => {
     };
 
     return (
+        <TopBar>
         <View style={{ flex: 1 }}>
             {loading ? <ActivityIndicator animating={true} color={MD2Colors.red500} size={100} /> : null}
             <FlatList
@@ -64,6 +66,7 @@ const VehicleList = () => {
             </View>
            
         </View>
+        </TopBar>
     );
 };
 

@@ -13,7 +13,6 @@ import ServiceHistory from './src/component/ServiceHistory';
 import NotificationSettings  from './src/component/NotificationSettings';
 import VehicleContext from './src/vehicleContext/vehicleContext';
 
-
 const Stack = createStackNavigator();
 
 const App = () => {
