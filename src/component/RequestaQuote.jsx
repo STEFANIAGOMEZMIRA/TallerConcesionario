@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 import { TextInput, Divider, Button } from 'react-native-paper';
-import { Alert } from 'react-native'
+import { Alert } from 'react-native';
+import firestore from '@react-native-firebase/firestore'
 
 const RequestaQuote = () => {
-
-    const [fullname, setFullname] = React.useState("");
-    const [contactNumber, setContactNumber] = React.useState("");
-    const [message, setMessage] = React.useState("");
+    const [fullname, setFullname] = React.useState('');
+    const [contactNumber, setContactNumber] = React.useState('');
+    const [message, setMessage] = React.useState('');
 
     const handleSend = () => {
         if (fullname && contactNumber && message) {
@@ -15,27 +15,31 @@ const RequestaQuote = () => {
                 Alert.alert('Error', 'Por favor ingresa un número de contacto válido');
                 return;
             }
-            Alert.alert('Mensaje enviado', 'Tu mensaje ha sido enviado correctamente');
-            setFullname('');
-            setContactNumber('');
-            setMessage('');
+            firestore().collection('Solicitud Cotización').add({
+                fullname: fullname,
+                contactNumber: contactNumber,
+                message: message,
+            }).then(() => {
+                Alert.alert('Mensaje enviado', 'Tu mensaje ha sido enviado correctamente');
+                setFullname('');
+                setContactNumber('');
+                setMessage('');
+            }).catch((error) => {
+                console.error("Error al enviar el mensaje:", error);
+                Alert.alert('Error', 'Ocurrió un error al enviar el mensaje. Por favor, intenta nuevamente.');
+            });
         } else {
             Alert.alert('Error', 'Por favor completa todos los campos');
         }
     };
 
-
-
-
-
     return (
-
         <ScrollView>
             <TextInput
                 label="Nombre y Apellido"
                 placeholder='Campo obligatorio'
                 value={fullname}
-                onChangeText={fullname => setFullname(fullname)}
+                onChangeText={setFullname}
             />
             <Divider />
             <TextInput
@@ -49,26 +53,20 @@ const RequestaQuote = () => {
                     }
                 }}
             />
-
             <Divider />
             <TextInput
                 label="Deja aquí tu mensaje"
                 placeholder='Campo obligatorio'
                 value={message}
                 multiline={true}
-                onChangeText={message => setMessage(message)}
+                onChangeText={setMessage}
             />
-
             <Divider />
-
             <Button icon="camera" mode="contained" onPress={handleSend}>
                 Enviar información
             </Button>
-
-
-
         </ScrollView>
-    )
-}
+    );
+};
 
-export default RequestaQuote
+export default RequestaQuote;

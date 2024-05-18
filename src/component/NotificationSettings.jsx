@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, Alert } from 'react-native';
 import { Checkbox, Button } from 'react-native-paper';
+import firestore from '@react-native-firebase/firestore';
 
 const NotificationSettings = () => {
   const [receiveNotifications, setReceiveNotifications] = useState(false);
@@ -10,13 +11,19 @@ const NotificationSettings = () => {
   };
 
   const saveSettings = () => {
-    firebase.database().ref('users/' + firebase.auth().currentUser.uid).update({
-      receiveNotifications: receiveNotifications
-    }).then(() => {
-      console.log('Configuración de notificaciones guardada:', receiveNotifications);
-    }).catch(error => {
-      console.error('Error al guardar la configuración de notificaciones:', error);
-    });
+    firestore()
+      .collection('notificationSettings')
+      .add({
+        receiveNotifications: receiveNotifications,
+        timestamp: firestore.FieldValue.serverTimestamp() // Guarda la fecha y hora de la configuración
+      })
+      .then(() => {
+        Alert.alert('Configuración guardada', 'Tu configuración de notificaciones ha sido guardada correctamente');
+      })
+      .catch((error) => {
+        console.error('Error al guardar la configuración de notificaciones:', error);
+        Alert.alert('Error', 'Ocurrió un error al guardar la configuración. Por favor, intenta nuevamente.');
+      });
   };
 
   return (

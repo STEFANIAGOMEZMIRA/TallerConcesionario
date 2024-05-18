@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, Alert } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import { DatePickerInput, registerTranslation, es, TimePickerModal } from 'react-native-paper-dates';
+import firestore from '@react-native-firebase/firestore';
 registerTranslation('es', es);
 
 const WorkshopService = () => {
@@ -10,7 +11,7 @@ const WorkshopService = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
   const [dateTime, setDateTime] = useState('Click en el icono...');
-  const [visible, setVisible] = React.useState(false)
+  const [visible, setVisible] = useState(false)
 
   const onDismiss = React.useCallback(() => {
     setVisible(false)
@@ -32,15 +33,26 @@ const WorkshopService = () => {
       return;
     }
 
-    Alert.alert('Solicitud enviada', 'Tu solicitud de cita ha sido enviada correctamente.');
-   
-    setDate('');
-    setFullName('');
-    setPhoneNumber('');
-    setEmail('');
-    setDateTime('Click en el icono...');
+    firestore().collection('Servicio de taller').add({
+        String: date.toISOString(),
+        fullName: fullName,
+        phoneNumber: phoneNumber,
+        email: email,
+        dateTime: dateTime,
+      })
+      .then(() => {
+        Alert.alert('Solicitud enviada', 'Tu solicitud de cita ha sido enviada correctamente.');
+        setDate('');
+        setFullName('');
+        setPhoneNumber('');
+        setEmail('');
+        setDateTime('Click en el icono...');
+      })
+      .catch((error) => {
+        console.error('Error al enviar la solicitud:', error);
+        Alert.alert('Error', 'Ocurrió un error al enviar la solicitud. Por favor, intenta nuevamente.');
+      });
   };
-  
 
   return (
     <ScrollView>
