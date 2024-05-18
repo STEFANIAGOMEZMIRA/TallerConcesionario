@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
+import firestore from '@react-native-firebase/firestore';
 
 const Contact = () => {
   const [name, setName] = useState('');
@@ -17,11 +18,25 @@ const Contact = () => {
         Alert.alert('Error', 'Por favor ingresa un número de teléfono válido');
         return;
       }
-      Alert.alert('Mensaje enviado', 'Tu mensaje ha sido enviado correctamente');
-      setName('');
-      setEmail('');
-      setPhone('');
-      setMessage('');
+
+  
+      firestore().collection('Contacto').add({
+          name: name,
+          email: email,
+          phone: phone,
+          message: message,
+        })
+        .then(() => {
+          Alert.alert('Mensaje enviado', 'Tu mensaje ha sido enviado correctamente');
+          setName('');
+          setEmail('');
+          setPhone('');
+          setMessage('');
+        })
+        .catch((error) => {
+          console.error("Error al enviar el mensaje:", error);
+          Alert.alert('Error', 'Ocurrió un error al enviar el mensaje. Por favor, intenta nuevamente.');
+        });
     } else {
       Alert.alert('Error', 'Por favor completa todos los campos');
     }
