@@ -24,7 +24,7 @@ const VehicleContextProvider = (props) => {
         showActivity(true);
         const keywordArray = keyword.toLowerCase().split(" ");
         let filteredVehicles = [];
-    
+
         for (const vehicle of data) {
             let isMatch = false;
             for (let i = 0; i < keywordArray.length; i++) {
@@ -38,12 +38,12 @@ const VehicleContextProvider = (props) => {
                 filteredVehicles.push(vehicle);
             }
         }
-    
+
         setVehicles(filteredVehicles);
         showActivity(false);
     }
-    
-    
+
+
 
     async function loadData() {
         try {
